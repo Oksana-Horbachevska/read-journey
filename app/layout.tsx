@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import "modern-normalize/modern-normalize.css";
 import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -18,6 +20,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Read Journey App",
   description: "Created by Oksana Horbachevska",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${inter.variable} antialiased`}>
-        {children}
+        <TanStackProvider>
+          <div className="container"> {children}</div>
+        </TanStackProvider>
       </body>
     </html>
   );
