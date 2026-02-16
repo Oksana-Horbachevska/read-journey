@@ -1,0 +1,44 @@
+.section {
+  padding: 40px 40px 28px 40px;
+  border-radius: 30px;
+  width: 100%;
+  background: #1f1f1f;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+}
+
+.paginationWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.prevBtn,
+.nextBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  width: 40px;
+  height: 40px;
+}
+
+.prevSvg,
+.nextSvg {
+  stroke: #f9f9f9;
+}
