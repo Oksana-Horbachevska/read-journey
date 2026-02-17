@@ -30,42 +30,6 @@
   color: rgba(227, 227, 227, 0.5);
 }
 
-.btnWrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  justify-content: start;
-}
-
-.authSubmitBtn {
-  display: block;
-  width: auto;
-  align-items: center;
-  border-radius: 30px;
-  padding: 16px 54px;
-  width: 225px;
-  height: 52px;
-  background: #f9f9f9;
-  font-family: var(--font-family);
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 100%;
-  letter-spacing: 0.02em;
-  color: #1f1f1f;
-}
-
-.authLink {
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 129%;
-  letter-spacing: -0.02em;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  color: #686868;
-}
-
 .imagePart {
   display: flex;
   justify-content: center;

@@ -16,14 +16,6 @@ export default function Welcome() {
           Expand your mind, reading <span className={css.span}>a book</span>
         </h1>
         <RegisterForm />
-        <div className={css.btnWrapper}>
-          <button type="submit" className={css.authSubmitBtn}>
-            Registration
-          </button>
-          <Link className={css.authLink} href="/login">
-            Already have an account?
-          </Link>
-        </div>
       </div>
       <div className={css.imagePart}>
         <div className={css.imageWrapper}>
