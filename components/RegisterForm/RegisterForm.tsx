@@ -1,34 +1,92 @@
+"use client";
+
 import Link from "next/link";
 import css from "./RegisterForm.module.css";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
+interface RegisterValues {
+  name: string;
+  email: string;
+  password: string;
+}
+
+// YUP VALIDATION SCHEMA
+const schema = Yup.object({
+  name: Yup.string()
+    .min(2, "Name must be at least 2 characters")
+    .required("Name is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 export default function RegisterForm() {
+  // REACT HOOK FORM
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<RegisterValues>({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
+
+  const onSubmit = (data: RegisterValues) => {
+    console.log(data);
+    reset();
+  };
+
   return (
     <div>
-      <form className={css.registerForm}>
+      <form className={css.registerForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputWrapper}>
           <span className={css.labelPrefix}>Name:</span>
-          <input className={css.input} type="text" placeholder="" />
+          <input
+            className={css.input}
+            type="text"
+            placeholder=""
+            {...register("name")}
+          />
+          {errors.name && <p className={css.error}>{errors.name.message}</p>}
         </div>
         <div className={css.inputWrapper}>
           <span className={css.labelPrefix}>Mail:</span>
-          <input className={css.input} type="email" placeholder="" />
+          <input
+            className={css.input}
+            type="email"
+            placeholder=""
+            {...register("email")}
+          />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div className={css.inputWrapper}>
           <span className={css.labelPrefix}>Password:</span>
-          <input className={css.input} type="password" placeholder="" />
+          <input
+            className={css.input}
+            type="password"
+            placeholder=""
+            {...register("password")}
+          />
           <svg className={css.passwordSvg} width="20" height="15">
             <use href="/sprite.svg#icon-eye-off" />
           </svg>
+          {errors.password && (
+            <p className={css.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <div className={css.btnWrapper}>
+          <button type="submit" className={css.authSubmitBtn}>
+            Registration
+          </button>
+          <Link className={css.authLink} href="/login">
+            Already have an account?
+          </Link>
         </div>
       </form>
-      <div className={css.btnWrapper}>
-        <button type="submit" className={css.authSubmitBtn}>
-          Registration
-        </button>
-        <Link className={css.authLink} href="/login">
-          Already have an account?
-        </Link>
-      </div>
     </div>
   );
 }

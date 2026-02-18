@@ -1,0 +1,99 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 82px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 50px;
+  background: #262626;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.labelPrefix {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #686868;
+  white-space: nowrap;
+}
+
+.input {
+  flex-grow: 1;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: #f9f9f9;
+}
+
+.input::placeholder {
+  color: #686868;
+  opacity: 1;
+}
+
+.inputWrapper:focus-within {
+  border-color: rgba(249, 249, 249, 0.1);
+}
+
+.passwordSvg {
+  stroke: #f9f9f9;
+  stroke-width: 1.3px;
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: start;
+}
+
+.authSubmitBtn {
+  display: block;
+  width: auto;
+  align-items: center;
+  border-radius: 30px;
+  padding: 16px 54px;
+  height: 52px;
+  background: #f9f9f9;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+  color: #1f1f1f;
+}
+
+.authSubmitBtn:hover {
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  color: #f9f9f9;
+  background-color: transparent;
+}
+
+.authLink {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #686868;
+}
+
+.authLink:hover {
+  color: #f9f9f9;
+}

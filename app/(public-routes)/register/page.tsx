@@ -1,9 +1,9 @@
 import Link from "next/link";
-import css from "../page.module.css";
+import css from "./Register.module.css";
 import RegisterForm from "@/components/RegisterForm/RegisterForm";
 import Image from "next/image";
 
-export default function Welcome() {
+export default function Register() {
   return (
     <section className={css.section}>
       <div className={css.authPart}>

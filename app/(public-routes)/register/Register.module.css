@@ -1,0 +1,46 @@
+.section {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.authPart {
+  border-radius: 30px;
+  width: calc((100% - 16px) / 2);
+  background: #1f1f1f;
+  padding: 40px 64px;
+}
+
+.logoIcon {
+  fill: white;
+}
+
+.title {
+  margin-top: 107px;
+  margin-bottom: 40px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 94%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+}
+
+.span {
+  color: rgba(227, 227, 227, 0.5);
+}
+
+.imagePart {
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  width: calc((100% - 16px) / 2);
+  background: #1f1f1f;
+}
+
+.imageWrapper {
+  margin-top: 86px;
+}
+
+.imaage {
+}
