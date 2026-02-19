@@ -45,9 +45,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          apiError.response?.data?.message ||
-          apiError.message ||
-          "Unknown error",
+          apiError.response?.data?.error || apiError.message || "Unknown error",
       },
       { status: apiError.response?.status || 500 },
     );
