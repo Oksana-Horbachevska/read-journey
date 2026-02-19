@@ -19,3 +19,12 @@ export type AuthResponseLogin = {
   email: string;
   password: string;
 };
+
+export interface ApiBackendError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+  message: string;
+}

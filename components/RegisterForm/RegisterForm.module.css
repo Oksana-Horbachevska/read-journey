@@ -4,6 +4,12 @@
   gap: 14px;
 }
 
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .inputWrapper {
   display: flex;
   align-items: center;
@@ -45,6 +51,15 @@
 
 .inputWrapper:focus-within {
   border-color: rgba(249, 249, 249, 0.1);
+}
+
+.error {
+  color: #e63946;
+  font-family: var(--font-family);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-left: 14px;
 }
 
 .passwordSvg {

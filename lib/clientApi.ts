@@ -16,7 +16,6 @@ export const loginUser = async (credentials: LoginCredentials) => {
 };
 
 export const registerUser = async (credentials: RegisterCredentials) => {
-  console.log("Sending:", credentials);
   const { data } = await nextServer.post<AuthResponseRegister>(
     "/users/signup",
     credentials,

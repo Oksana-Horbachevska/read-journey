@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { registerUser } from "@/lib/clientApi";
 import { useRouter } from "next/navigation";
+import { ApiBackendError } from "@/types/auth";
+import toast from "react-hot-toast";
 
 interface RegisterValues {
   name: string;
@@ -33,7 +35,7 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<RegisterValues>({
     resolver: yupResolver(schema),
@@ -48,52 +50,68 @@ export default function RegisterForm() {
       router.push("/recommended");
 
       reset();
-    } catch (error) {
+    } catch (err) {
+      const error = err as ApiBackendError;
       console.error(error);
+      const errorMessage =
+        error.response?.data?.error ||
+        error.message ||
+        "An unexpected error occurred";
+      toast.error(errorMessage);
     }
   };
 
   return (
     <div>
       <form className={css.registerForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={css.inputWrapper}>
-          <span className={css.labelPrefix}>Name:</span>
-          <input
-            className={css.input}
-            type="text"
-            placeholder=""
-            {...register("name")}
-          />
+        <div className={css.fieldContainer}>
+          <div className={css.inputWrapper}>
+            <span className={css.labelPrefix}>Name:</span>
+            <input
+              className={css.input}
+              type="text"
+              placeholder=""
+              {...register("name")}
+            />
+          </div>
           {errors.name && <p className={css.error}>{errors.name.message}</p>}
         </div>
-        <div className={css.inputWrapper}>
-          <span className={css.labelPrefix}>Mail:</span>
-          <input
-            className={css.input}
-            type="email"
-            placeholder=""
-            {...register("email")}
-          />
+        <div className={css.fieldContainer}>
+          <div className={css.inputWrapper}>
+            <span className={css.labelPrefix}>Mail:</span>
+            <input
+              className={css.input}
+              type="email"
+              placeholder=""
+              {...register("email")}
+            />
+          </div>
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
-        <div className={css.inputWrapper}>
-          <span className={css.labelPrefix}>Password:</span>
-          <input
-            className={css.input}
-            type="password"
-            placeholder=""
-            {...register("password")}
-          />
-          <svg className={css.passwordSvg} width="20" height="15">
-            <use href="/sprite.svg#icon-eye-off" />
-          </svg>
+        <div className={css.fieldContainer}>
+          <div className={css.inputWrapper}>
+            <span className={css.labelPrefix}>Password:</span>
+            <input
+              className={css.input}
+              type="password"
+              placeholder=""
+              {...register("password")}
+            />
+            <svg className={css.passwordSvg} width="20" height="15">
+              <use href="/sprite.svg#icon-eye-off" />
+            </svg>
+          </div>
           {errors.password && (
             <p className={css.error}>{errors.password.message}</p>
           )}
         </div>
         <div className={css.btnWrapper}>
-          <button type="submit" className={css.authSubmitBtn}>
-            Registration
+          <button
+            type="submit"
+            className={css.authSubmitBtn}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Processing..." : "Registration"}
           </button>
           <Link className={css.authLink} href="/login">
             Already have an account?
