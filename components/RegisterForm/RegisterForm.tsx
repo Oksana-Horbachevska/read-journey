@@ -5,6 +5,8 @@ import css from "./RegisterForm.module.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { registerUser } from "@/lib/clientApi";
+import { useRouter } from "next/navigation";
 
 interface RegisterValues {
   name: string;
@@ -14,16 +16,19 @@ interface RegisterValues {
 
 // YUP VALIDATION SCHEMA
 const schema = Yup.object({
-  name: Yup.string()
-    .min(2, "Name must be at least 2 characters")
-    .required("Name is required"),
+  name: Yup.string().required("Name is required").trim(),
+
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
+    .required("Email is required")
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+
+  password: Yup.string()
+    .required("Password is required")
+    .min(7, "Password must be at least 7 characters"),
 });
 
 export default function RegisterForm() {
+  const router = useRouter();
   // REACT HOOK FORM
   const {
     register,
@@ -35,9 +40,17 @@ export default function RegisterForm() {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: RegisterValues) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data: RegisterValues) => {
+    try {
+      await registerUser(data);
+      console.log(data);
+
+      router.push("/recommended");
+
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
