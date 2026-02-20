@@ -9,6 +9,7 @@ import { registerUser } from "@/lib/clientApi";
 import { useRouter } from "next/navigation";
 import { ApiBackendError } from "@/types/auth";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface RegisterValues {
   name: string;
@@ -31,6 +32,8 @@ const schema = Yup.object({
 
 export default function RegisterForm() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
   // REACT HOOK FORM
   const {
     register,
@@ -41,6 +44,10 @@ export default function RegisterForm() {
     resolver: yupResolver(schema),
     mode: "onBlur",
   });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   const onSubmit = async (data: RegisterValues) => {
     try {
@@ -93,13 +100,26 @@ export default function RegisterForm() {
             <span className={css.labelPrefix}>Password:</span>
             <input
               className={css.input}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder=""
               {...register("password")}
             />
-            <svg className={css.passwordSvg} width="20" height="15">
-              <use href="/sprite.svg#icon-eye-off" />
-            </svg>
+            <button
+              type="button"
+              className={css.eyeBtn}
+              onClick={togglePasswordVisibility}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              <svg className={css.passwordSvg} width="20" height="15">
+                <use
+                  href={
+                    showPassword
+                      ? "/sprite.svg#icon-eye-off"
+                      : "/sprite.svg#icon-eye"
+                  }
+                />
+              </svg>
+            </button>
           </div>
           {errors.password && (
             <p className={css.error}>{errors.password.message}</p>

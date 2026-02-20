@@ -16,18 +16,15 @@ export async function POST(req: NextRequest) {
       for (const cookieStr of cookieArray) {
         const parsed = parse(cookieStr);
 
-        // Витягуємо назву куки та її значення
-        // Об'єкт після parse виглядає так: { [cookieName]: value, Path: '/', Expires: '...' }
         const cookieNames = Object.keys(parsed);
-        // Перший ключ - це завжди назва самої куки (напр. "token" або "accessToken")
         const mainTokenName = cookieNames[0];
         const tokenValue = parsed[mainTokenName];
 
         const options = {
           expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-          path: parsed.Path || "/", // Ставимо корінь, якщо Path порожній
+          path: parsed.Path || "/",
           maxAge: parsed["Max-Age"] ? Number(parsed["Max-Age"]) : undefined,
-          httpOnly: true, // Безпека!
+          httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: "lax" as const,
         };
@@ -38,7 +35,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Повертаємо дані успішної реєстрації
     return NextResponse.json(apiRes.data);
   } catch (error) {
     const apiError = error as ApiError;

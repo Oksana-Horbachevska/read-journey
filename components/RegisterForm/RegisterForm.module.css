@@ -112,3 +112,18 @@
 .authLink:hover {
   color: #f9f9f9;
 }
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #f9f9f9 !important;
+  box-shadow: 0 0 0px 1000px #262626 inset !important;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  outline: none !important;
+}

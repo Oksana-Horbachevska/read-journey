@@ -39,8 +39,11 @@
 }
 
 .imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: end;
   margin-top: 86px;
 }
 
-.imaage {
+.image {
 }
