@@ -30,13 +30,15 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   } catch (error) {
+    const apiError = error as ApiError;
+    const errorMessage =
+      apiError.response?.data?.message ||
+      apiError.response?.data?.error ||
+      apiError.message ||
+      "Unknown error";
     return NextResponse.json(
-      {
-        error:
-          (error as ApiError).response?.data?.error ??
-          (error as ApiError).message,
-      },
-      { status: (error as ApiError).status },
+      { message: errorMessage },
+      { status: apiError.response?.status || 500 },
     );
   }
 }

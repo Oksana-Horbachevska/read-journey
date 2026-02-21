@@ -38,11 +38,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(apiRes.data);
   } catch (error) {
     const apiError = error as ApiError;
+    const errorMessage =
+      apiError.response?.data?.message ||
+      apiError.response?.data?.error ||
+      apiError.message ||
+      "Unknown error";
     return NextResponse.json(
-      {
-        error:
-          apiError.response?.data?.error || apiError.message || "Unknown error",
-      },
+      { message: errorMessage },
       { status: apiError.response?.status || 500 },
     );
   }

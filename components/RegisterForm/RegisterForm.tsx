@@ -19,11 +19,11 @@ interface RegisterValues {
 
 // YUP VALIDATION SCHEMA
 const schema = Yup.object({
-  name: Yup.string().required("Name is required").trim(),
+  name: Yup.string().min(2).required("Name is required").trim(),
 
   email: Yup.string()
     .required("Email is required")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Enter a valid email"),
 
   password: Yup.string()
     .required("Password is required")
@@ -38,12 +38,27 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    watch,
+    formState: { errors, isSubmitting, dirtyFields },
     reset,
   } = useForm<RegisterValues>({
     resolver: yupResolver(schema),
-    mode: "onBlur",
+    mode: "onChange",
   });
+
+  const nameValue = watch("name");
+  const isNameInvalid = !!errors.name;
+  const isNameValid = !errors.name && dirtyFields.name && nameValue?.length > 2;
+
+  const emailValue = watch("email");
+  const isEmailInvalid = !!errors.email;
+  const isEmailValid =
+    !errors.email && dirtyFields.email && emailValue?.length > 0;
+
+  const passwordValue = watch("password");
+  const isPasswordInvalid = !!errors.password;
+  const isPasswordValid =
+    !errors.password && dirtyFields.password && passwordValue?.length >= 7;
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -61,9 +76,7 @@ export default function RegisterForm() {
       const error = err as ApiBackendError;
       console.error(error);
       const errorMessage =
-        error.response?.data?.error ||
-        error.message ||
-        "An unexpected error occurred";
+        error.response?.data?.message || "Something went wrong";
       toast.error(errorMessage);
     }
   };
@@ -72,7 +85,9 @@ export default function RegisterForm() {
     <div>
       <form className={css.registerForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.fieldContainer}>
-          <div className={css.inputWrapper}>
+          <div
+            className={`${css.inputWrapper} ${isNameInvalid ? css.inputErrorBorder : ""} ${isNameValid ? css.inputValidBorder : ""}`}
+          >
             <span className={css.labelPrefix}>Name:</span>
             <input
               className={css.input}
@@ -84,7 +99,9 @@ export default function RegisterForm() {
           {errors.name && <p className={css.error}>{errors.name.message}</p>}
         </div>
         <div className={css.fieldContainer}>
-          <div className={css.inputWrapper}>
+          <div
+            className={`${css.inputWrapper} ${isEmailInvalid ? css.inputErrorBorder : ""} ${isEmailValid ? css.inputValidBorder : ""}`}
+          >
             <span className={css.labelPrefix}>Mail:</span>
             <input
               className={css.input}
@@ -96,7 +113,9 @@ export default function RegisterForm() {
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div className={css.fieldContainer}>
-          <div className={css.inputWrapper}>
+          <div
+            className={`${css.inputWrapper} ${isPasswordInvalid ? css.inputErrorBorder : ""} ${isPasswordValid ? css.inputValidBorder : ""}`}
+          >
             <span className={css.labelPrefix}>Password:</span>
             <input
               className={css.input}
@@ -110,12 +129,14 @@ export default function RegisterForm() {
               onClick={togglePasswordVisibility}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              <svg className={css.passwordSvg} width="20" height="15">
+              <svg className={css.passwordSvg} width="20" height="20">
                 <use
                   href={
-                    showPassword
-                      ? "/sprite.svg#icon-eye-off"
-                      : "/sprite.svg#icon-eye"
+                    errors.password
+                      ? "/sprite.svg#icon-pajamas_error"
+                      : showPassword
+                        ? "/sprite.svg#icon-eye"
+                        : "/sprite.svg#icon-eye-off"
                   }
                 />
               </svg>

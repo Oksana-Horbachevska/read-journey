@@ -22,6 +22,14 @@
   transition: border-color 0.3s ease;
 }
 
+.inputErrorBorder {
+  border-color: #e90516 !important;
+}
+
+.inputValidBorder {
+  border-color: #30b94d !important;
+}
+
 .labelPrefix {
   font-family: var(--font-family);
   font-weight: 500;
@@ -63,8 +71,17 @@
 }
 
 .passwordSvg {
+  display: block;
+  align-items: center;
   stroke: #f9f9f9;
-  stroke-width: 1.3px;
+}
+
+.inputErrorBorder .passwordSvg {
+  stroke: #e90516;
+}
+
+.inputValidBorder .passwordSvg {
+  stroke: #30b94d;
 }
 
 .btnWrapper {

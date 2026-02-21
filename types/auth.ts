@@ -24,7 +24,9 @@ export interface ApiBackendError {
   response?: {
     data?: {
       error?: string;
+      message?: string;
     };
+    status?: number;
   };
   message: string;
 }

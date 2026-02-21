@@ -3,6 +3,7 @@ import "modern-normalize/modern-normalize.css";
 import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { Toaster } from "react-hot-toast";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className={`${montserrat.variable} ${inter.variable} antialiased`}>
         <TanStackProvider>
           <div className="container"> {children}</div>
+          <Toaster position="top-right" reverseOrder={false} />
         </TanStackProvider>
       </body>
     </html>
