@@ -47,7 +47,11 @@ export default function LoginForm() {
   const passwordValue = watch("password");
   const isPasswordInvalid = !!errors.password;
   const isPasswordValid =
-    !errors.password && dirtyFields.password && passwordValue.length > 7;
+    !errors.password && dirtyFields.password && passwordValue.length >= 7;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   async function onSubmit(data: LoginValues) {
     try {
@@ -62,10 +66,6 @@ export default function LoginForm() {
       toast.error(errorMessage);
     }
   }
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
 
   return (
     <div>
@@ -91,7 +91,7 @@ export default function LoginForm() {
             <span className={css.labelPrefix}>Password:</span>
             <input
               className={css.input}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder=""
               {...register("password")}
             />
@@ -118,19 +118,19 @@ export default function LoginForm() {
             <p className={css.error}>{errors.password.message}</p>
           )}
         </div>
+        <div className={css.btnWrapper}>
+          <button
+            type="submit"
+            className={css.authSubmitBtn}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Processing..." : "Log In"}
+          </button>
+          <Link className={css.authLink} href="/register">
+            Don’t have an account?
+          </Link>
+        </div>
       </form>
-      <div className={css.btnWrapper}>
-        <button
-          type="submit"
-          className={css.authSubmitBtn}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Processing..." : "Log In"}
-        </button>
-        <Link className={css.authLink} href="/register">
-          Don’t have an account?
-        </Link>
-      </div>
     </div>
   );
 }
