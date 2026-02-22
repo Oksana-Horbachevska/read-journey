@@ -20,6 +20,29 @@ export type AuthResponseLogin = {
   password: string;
 };
 
+export type AuthResponseLogout = {
+  message: string;
+};
+
+export type CheckCurrentUser = {
+  success: boolean;
+  user?: {
+    _id: string;
+    name: string;
+    email: string;
+    token: string;
+    refreshToken: string;
+  };
+};
+
+export type RefreshCurrentUser = {
+  success: boolean;
+  user?: {
+    token: string;
+    refreshToken: string;
+  };
+};
+
 export interface ApiBackendError {
   response?: {
     data?: {

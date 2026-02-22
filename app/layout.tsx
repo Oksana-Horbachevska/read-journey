@@ -4,6 +4,7 @@ import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { Toaster } from "react-hot-toast";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -35,8 +36,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} ${inter.variable} antialiased`}>
         <TanStackProvider>
-          <div className="container"> {children}</div>
-          <Toaster position="top-right" reverseOrder={false} />
+          <AuthProvider>
+            <div className="container"> {children}</div>
+            <Toaster position="top-right" reverseOrder={false} />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

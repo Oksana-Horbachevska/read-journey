@@ -5,7 +5,7 @@ import css from "./RegisterForm.module.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { registerUser } from "@/lib/clientApi";
+import { registerUser } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { ApiBackendError } from "@/types/auth";
 import toast from "react-hot-toast";

@@ -5,7 +5,7 @@ import css from "./LoginForm.module.css";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUser } from "@/lib/clientApi";
+import { loginUser } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { ApiBackendError } from "@/types/auth";
 import toast from "react-hot-toast/headless";
