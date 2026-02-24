@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const publicPaths = ["/users/login", "/users/register"];
+const publicPaths = ["/login", "/register"];
 const privatePaths = ["/recommended", "/library", "/reading"];
 
 export function middleware(req: NextRequest) {
@@ -17,7 +17,7 @@ export function middleware(req: NextRequest) {
 
   // 1. Якщо шлях приватний і немає ЖОДНОГО токена -> на логін
   if (isPrivatePath && !isAuth) {
-    return NextResponse.redirect(new URL("/users/login", req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   // 2. Якщо шлях публічний (логін/реєстрація), але юзер вже залогінений -> на головну
@@ -34,7 +34,7 @@ export const config = {
     "/recommended/:path*",
     "/library/:path*",
     "/reading/:path*",
-    "/users/login",
-    "/users/register",
+    "/login",
+    "/register",
   ],
 };

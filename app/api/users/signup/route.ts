@@ -1,40 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { api, ApiError } from "../../api";
-import { parse } from "cookie";
 import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   try {
-    const apiRes = await api.post("users/signup", body);
+    // 1. Робимо запит на реєстрацію
+    const apiRes = await api.post("/users/signup", body);
+
+    // 2. Беремо токени з тіла відповіді (так само, як у логіні)
+    const { token, refreshToken } = apiRes.data;
+
     const cookieStore = await cookies();
-    const setCookie = apiRes.headers["set-cookie"];
 
-    if (setCookie) {
-      const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax" as const,
+      path: "/",
+    };
 
-      for (const cookieStr of cookieArray) {
-        const parsed = parse(cookieStr);
-
-        const cookieNames = Object.keys(parsed);
-        const mainTokenName = cookieNames[0];
-        const tokenValue = parsed[mainTokenName];
-
-        const options = {
-          expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-          path: parsed.Path || "/",
-          maxAge: parsed["Max-Age"] ? Number(parsed["Max-Age"]) : undefined,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax" as const,
-        };
-
-        if (tokenValue) {
-          cookieStore.set(mainTokenName, tokenValue, options);
-        }
-      }
+    // 3. Явно встановлюємо куки під іменами, які розуміє Middleware
+    if (token) {
+      cookieStore.set("accessToken", token, {
+        ...cookieOptions,
+        maxAge: 60 * 60 * 24, // 24 години
+      });
     }
 
+    if (refreshToken) {
+      cookieStore.set("refreshToken", refreshToken, {
+        ...cookieOptions,
+        maxAge: 60 * 60 * 24 * 7, // 7 днів
+      });
+    }
+
+    // Повертаємо дані юзера на клієнт
     return NextResponse.json(apiRes.data);
   } catch (error) {
     const apiError = error as ApiError;
@@ -42,7 +43,8 @@ export async function POST(req: NextRequest) {
       apiError.response?.data?.message ||
       apiError.response?.data?.error ||
       apiError.message ||
-      "Unknown error";
+      "Registration failed";
+
     return NextResponse.json(
       { message: errorMessage },
       { status: apiError.response?.status || 500 },

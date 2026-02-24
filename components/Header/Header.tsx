@@ -4,13 +4,15 @@ import Link from "next/link";
 import css from "./Header.module.css";
 import { logoutUser } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function Header() {
   const router = useRouter();
+  const { user, clearIsAuthenticated } = useAuthStore();
+
   const handleLogout = async () => {
     await logoutUser();
-    // Чистимо глобальний стан
-    //clearIsAuthenticated();
+    clearIsAuthenticated();
 
     router.push("/");
   };
@@ -38,8 +40,10 @@ export default function Header() {
       </nav>
       <div className={css.userBar}>
         <div className={css.userWrapper}>
-          <div className={css.userIcon}>O</div>
-          <div className={css.userName}>Oksana</div>
+          <div className={css.userIcon}>
+            {user?.name?.[0].toUpperCase() || "?"}
+          </div>
+          <div className={css.userName}>{user?.name}</div>
         </div>
         <button className={css.logoutUser} onClick={handleLogout}>
           Log out

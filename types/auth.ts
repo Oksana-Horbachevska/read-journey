@@ -12,12 +12,15 @@ export type LoginCredentials = {
 export type AuthResponseRegister = {
   name: string;
   email: string;
-  password: string;
+  token: string;
+  refreshToken: string;
 };
 
 export type AuthResponseLogin = {
+  name: string;
   email: string;
-  password: string;
+  token: string;
+  refreshToken: string;
 };
 
 export type AuthResponseLogout = {

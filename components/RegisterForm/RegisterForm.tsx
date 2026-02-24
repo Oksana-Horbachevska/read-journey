@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { ApiBackendError } from "@/types/auth";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useAuthStore } from "@/lib/store/authStore";
 
 interface RegisterValues {
   name: string;
@@ -33,6 +34,7 @@ const schema = Yup.object({
 export default function RegisterForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuthStore();
 
   // REACT HOOK FORM
   const {
@@ -66,10 +68,13 @@ export default function RegisterForm() {
 
   const onSubmit = async (data: RegisterValues) => {
     try {
-      await registerUser(data);
+      const res = await registerUser(data);
       console.log(data);
+      if (res && res.token) {
+        setUser(res);
 
-      router.push("/recommended");
+        router.replace("/recommended");
+      }
 
       reset();
     } catch (err) {

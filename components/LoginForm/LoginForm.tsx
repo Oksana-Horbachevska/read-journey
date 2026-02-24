@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { ApiBackendError } from "@/types/auth";
 import toast from "react-hot-toast/headless";
 import { useState } from "react";
+import { useAuthStore } from "@/lib/store/authStore";
 
 interface LoginValues {
   email: string;
@@ -27,6 +28,7 @@ const schema = Yup.object({
 export default function LoginForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuthStore();
   // REACT HOOK FORM
   const {
     register,
@@ -55,9 +57,13 @@ export default function LoginForm() {
 
   async function onSubmit(data: LoginValues) {
     try {
-      await loginUser(data);
+      const res = await loginUser(data);
       console.log(data);
-      router.push("/recommended");
+      if (res && res.token) {
+        setUser(res);
+        router.replace("/recommended");
+      }
+
       reset();
     } catch (err) {
       const error = err as ApiBackendError;
