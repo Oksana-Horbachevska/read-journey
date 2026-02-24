@@ -38,8 +38,8 @@ export default function RootLayout({
         <TanStackProvider>
           <AuthProvider>
             <div className="container"> {children}</div>
-            <Toaster position="top-right" reverseOrder={false} />
           </AuthProvider>
+          <Toaster position="top-right" reverseOrder={false} />
         </TanStackProvider>
       </body>
     </html>
