@@ -1,9 +1,17 @@
 "use client";
 
-import RecommendedList from "@/components/RecommendedList/RecommendedList";
-import css from "./Recommended.module.css";
+import { fetchBooks } from "@/lib/api/serverApi";
+import RecommendedList from "../RecommendedList/RecommendedList";
+import css from "./RecommendedBooks.module.css";
+import { useQuery } from "@tanstack/react-query";
 
-export default function RecommendedClient() {
+export default function RecommendedBooks() {
+  const params = { page: 1, limit: 10 };
+
+  const { data } = useQuery({
+    queryKey: ["books", params],
+    queryFn: () => fetchBooks(params),
+  });
   return (
     <div className={css.section}>
       <div className={css.titleWrapper}>
@@ -22,7 +30,7 @@ export default function RecommendedClient() {
           </button>
         </div>
       </div>
-      <RecommendedList />;
+      <RecommendedList books={data?.results || []} />
     </div>
   );
 }
