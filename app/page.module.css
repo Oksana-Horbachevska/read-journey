@@ -1,0 +1,17 @@
+.layoutWrapper {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.sidebar {
+  border-radius: 30px;
+  background: #1f1f1f;
+  padding: 40px 20px 20px 20px;
+  width: 353px;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex-grow: 1;
+}

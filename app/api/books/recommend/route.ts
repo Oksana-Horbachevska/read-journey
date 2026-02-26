@@ -14,12 +14,17 @@ export async function GET(req: NextRequest) {
     const title = searchParams.get("title") || "";
     const author = searchParams.get("author") || "";
 
+    const token = req.cookies.get("accessToken")?.value;
+
     const res = await api.get("/books/recommend", {
       params: {
         page,
         limit,
         title,
         author,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     });
 
