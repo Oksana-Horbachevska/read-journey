@@ -43,3 +43,13 @@
 .nextSvg {
   stroke: #f9f9f9;
 }
+
+.prevBtn:disabled,
+.nextBtn:disabled {
+  cursor: none;
+}
+
+.prevBtn:disabled .prevSvg,
+.nextBtn:disabled .nextSvg {
+  stroke: rgba(249, 249, 249, 0.2);
+}
