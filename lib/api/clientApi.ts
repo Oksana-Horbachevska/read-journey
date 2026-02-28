@@ -9,6 +9,7 @@ import {
 } from "@/types/auth";
 import { nextServer } from "./api";
 import { AxiosError } from "axios";
+import { Book } from "@/types/book";
 
 // === AUTH ===
 export const loginUser = async (credentials: LoginCredentials) => {
@@ -59,5 +60,17 @@ export const refreshUser = async () => {
   const res = await nextServer.get<RefreshCurrentUser>(
     "/users/current/refresh",
   );
+  return res.data;
+};
+
+// === BOOK ===
+
+export const fetchBookById = async (id: string): Promise<Book> => {
+  const res = await nextServer.get(`/books/${id}`);
+  return res.data;
+};
+
+export const addBookById = async (id: string): Promise<Book> => {
+  const res = await nextServer.post(`/books/add/${id}`);
   return res.data;
 };

@@ -1,2 +1,7 @@
 .dashboard {
+  border-radius: 30px;
+  background: #1f1f1f;
+  padding: 40px 20px 20px 20px;
+  width: 353px;
+  height: 100%;
 }

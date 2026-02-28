@@ -1,0 +1,56 @@
+.guideBlock {
+  background: #262626;
+  border-radius: 12px;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.guigeTitle {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+}
+
+.guigeList {
+}
+
+.guigeItem {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+}
+
+.guigeItem .hilight {
+  color: #f9f9f9;
+}
+
+.linkWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guideLink {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #686868;
+}
+
+.guideIcon {
+  stroke-width: 2px;
+  stroke: #f9f9f9;
+}

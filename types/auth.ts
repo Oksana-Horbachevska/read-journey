@@ -56,3 +56,8 @@ export interface ApiBackendError {
   };
   message: string;
 }
+
+export interface ApiErrorData {
+  message?: string;
+  error?: string;
+}
