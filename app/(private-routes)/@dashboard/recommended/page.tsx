@@ -1,12 +1,13 @@
 import Dashboard from "@/components/Dashboard/Dashboard";
-import RecommendedDashboardContent from "@/components/RecommendedDashboard/RecommendedDashboard";
+import RecommendedDashboardFilter from "@/components/RecommendedDashboard/RecommendedDashboardFilter";
 import css from "./RecomendedDashbord.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
-export default function RecommendedDashboard() {
+export default function RecommendedDashboardPage() {
   return (
     <Dashboard>
-      <RecommendedDashboardContent />
+      <RecommendedDashboardFilter />
       <div className={css.guideBlock}>
         <h2 className={css.guigeTitle}>Start your workout</h2>
         <ol className={css.guigeList}>
@@ -29,6 +30,19 @@ export default function RecommendedDashboard() {
             </svg>
           </Link>
         </div>
+      </div>
+      <div className={css.quoteBlock}>
+        <Image
+          width={40}
+          height={40}
+          src="/images/Notifications/Books.png"
+          alt="books"
+          className={css.quoteImage}
+        ></Image>
+        <p className={css.quoteText}>
+          &ldquo;Books are <span className={css.hilight}>windows</span> to the
+          world, and reading is a journey into the unknown.&ldquo;
+        </p>
       </div>
     </Dashboard>
   );

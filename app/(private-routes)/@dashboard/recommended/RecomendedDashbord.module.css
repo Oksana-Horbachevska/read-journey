@@ -14,9 +14,13 @@
   letter-spacing: -0.02em;
   text-align: center;
   color: #f9f9f9;
+  margin-bottom: 40px;
 }
 
 .guigeList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .guigeItem {
@@ -33,6 +37,7 @@
 }
 
 .linkWrapper {
+  margin-top: 6px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -53,4 +58,35 @@
 .guideIcon {
   stroke-width: 2px;
   stroke: #f9f9f9;
+}
+
+.quoteBlock {
+  background: #262626;
+  border-radius: 12px;
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.quoteImage {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.quoteText {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+}
+
+.quoteText .hilight {
+  color: #f9f9f9;
 }
