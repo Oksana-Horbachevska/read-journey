@@ -9,15 +9,19 @@ export default function RecommendedDashboardPage() {
     <Dashboard>
       <RecommendedDashboardFilter />
       <div className={css.guideBlock}>
-        <h2 className={css.guigeTitle}>Start your workout</h2>
-        <ol className={css.guigeList}>
-          <li className={css.guigeItem}>
-            <span className={css.hilight}>Create a personal library:</span> add
-            the books you intend to read to it.
+        <h2 className={css.guideTitle}>Start your workout</h2>
+        <ol className={css.guideList}>
+          <li className={css.guideItem}>
+            <div className={css.guideContent}>
+              <span className={css.hilight}>Create a personal library:</span>{" "}
+              add the books you intend to read to it.
+            </div>
           </li>
-          <li className={css.guigeItem}>
-            <span className={css.hilight}>Create your first workout:</span>{" "}
-            define a goal, choose a period, start training.
+          <li className={css.guideItem}>
+            <div className={css.guideContent}>
+              <span className={css.hilight}>Create your first workout:</span>
+              define a goal, choose a period, start training.
+            </div>
           </li>
         </ol>
         <div className={css.linkWrapper}>
