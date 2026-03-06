@@ -9,7 +9,7 @@ import {
 } from "@/types/auth";
 import { nextServer } from "./api";
 import { AxiosError } from "axios";
-import { Book } from "@/types/book";
+import { AddBookCredentials, Book } from "@/types/book";
 
 // === AUTH ===
 export const loginUser = async (credentials: LoginCredentials) => {
@@ -72,5 +72,12 @@ export const fetchBookById = async (id: string): Promise<Book> => {
 
 export const addBookById = async (id: string): Promise<Book> => {
   const res = await nextServer.post(`/books/add/${id}`);
+  return res.data;
+};
+
+export const addBookManually = async (
+  credentials: AddBookCredentials,
+): Promise<Book> => {
+  const res = await nextServer.post("/books/add", credentials);
   return res.data;
 };

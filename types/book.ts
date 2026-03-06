@@ -25,3 +25,9 @@ export interface RecommendedBooksResponse {
   page: number;
   perPage: number;
 }
+
+export interface AddBookCredentials {
+  title: string;
+  author: string;
+  totalPages: number;
+}

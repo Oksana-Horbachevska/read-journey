@@ -15,8 +15,12 @@ import toast from "react-hot-toast";
 
 interface RecommendedListProps {
   books: Book[];
+  variant?: "full" | "sidebar";
 }
-export default function RecommendedList({ books }: RecommendedListProps) {
+export default function RecommendedList({
+  books,
+  variant = "full",
+}: RecommendedListProps) {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const queryClient = useQueryClient();
@@ -52,9 +56,11 @@ export default function RecommendedList({ books }: RecommendedListProps) {
     mutate(id);
   };
 
+  const listClassName = `${css.bookList} ${variant === "sidebar" ? css.sidebarList : ""}`;
+
   return (
     <div>
-      <ul className={css.bookList}>
+      <ul className={listClassName}>
         {books?.map((book) => (
           <li className={css.bookItem} key={book._id}>
             <div
@@ -65,8 +71,8 @@ export default function RecommendedList({ books }: RecommendedListProps) {
                 className={css.bookImage}
                 src={book.imageUrl}
                 alt={book.title}
-                width={137}
-                height={208}
+                width={variant === "sidebar" ? 71 : 137}
+                height={variant === "sidebar" ? 107 : 208}
               />
             </div>
             <h3 className={css.bookTitle}>{book.title}</h3>

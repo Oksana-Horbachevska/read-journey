@@ -1,6 +1,6 @@
 import Dashboard from "@/components/Dashboard/Dashboard";
 import RecommendedDashboardFilter from "@/components/RecommendedDashboard/RecommendedDashboardFilter";
-import css from "./RecomendedDashbord.module.css";
+import css from "./RecomendedDashboard.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
