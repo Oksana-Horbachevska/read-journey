@@ -1,20 +1,30 @@
-"use client";
-
 import { Book } from "@/types/book";
 import css from "./BookDetails.module.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface BookDetailsProps {
   book: Book;
-  onAdd: (id: string) => void;
-  isPending: boolean;
+  onAdd?: (id: string) => void;
+  isPending?: boolean;
+  variant?: "add" | "read";
 }
 
-export default function BookModal({
+export default function BookDetails({
   book,
   onAdd,
   isPending,
+  variant = "add",
 }: BookDetailsProps) {
+  const router = useRouter();
+
+  const handleAction = () => {
+    if (variant === "read") {
+      router.push(`/reading/${book._id}`);
+    } else if (onAdd) {
+      onAdd(book._id);
+    }
+  };
   return (
     <div className={css.wrapper}>
       <div className={css.contentWrapper}>
@@ -35,10 +45,14 @@ export default function BookModal({
       <button
         type="button"
         className={css.button}
-        onClick={() => onAdd(book._id)}
+        onClick={handleAction}
         disabled={isPending}
       >
-        {isPending ? "Adding..." : "Add to library"}
+        {variant === "read"
+          ? "Start reading"
+          : isPending
+            ? "Adding..."
+            : "Add to library"}
       </button>
     </div>
   );

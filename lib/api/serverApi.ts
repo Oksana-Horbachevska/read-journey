@@ -1,7 +1,9 @@
 import { AxiosError } from "axios";
 import { nextServer } from "./api";
 import { CheckCurrentUser, RefreshCurrentUser } from "@/types/auth";
-import { RecommendedBooksResponse } from "@/types/book";
+import { Book, RecommendedBooksResponse } from "@/types/book";
+
+// === AUTH ===
 
 export const checkUser = async () => {
   try {
@@ -33,6 +35,8 @@ export const refreshUser = async () => {
   return res.data;
 };
 
+// === BOOKS ===
+
 export const fetchBooks = async (params: {
   title?: string;
   author?: string;
@@ -43,5 +47,12 @@ export const fetchBooks = async (params: {
     "/books/recommend",
     { params },
   );
+  return data;
+};
+
+export const fetchBooksOwn = async (params: {
+  status?: string;
+}): Promise<Book[]> => {
+  const { data } = await nextServer.get<Book[]>("/books/own", { params });
   return data;
 };

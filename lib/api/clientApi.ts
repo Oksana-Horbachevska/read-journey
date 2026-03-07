@@ -9,7 +9,11 @@ import {
 } from "@/types/auth";
 import { nextServer } from "./api";
 import { AxiosError } from "axios";
-import { AddBookCredentials, Book } from "@/types/book";
+import {
+  AddBookCredentials,
+  Book,
+  RecommendedBooksResponse,
+} from "@/types/book";
 
 // === AUTH ===
 export const loginUser = async (credentials: LoginCredentials) => {
@@ -63,7 +67,7 @@ export const refreshUser = async () => {
   return res.data;
 };
 
-// === BOOK ===
+// === BOOKS ===
 
 export const fetchBookById = async (id: string): Promise<Book> => {
   const res = await nextServer.get(`/books/${id}`);
@@ -75,9 +79,21 @@ export const addBookById = async (id: string): Promise<Book> => {
   return res.data;
 };
 
+export const removeBookById = async (id: string): Promise<Book> => {
+  const res = await nextServer.delete(`/books/remove/${id}`);
+  return res.data;
+};
+
 export const addBookManually = async (
   credentials: AddBookCredentials,
 ): Promise<Book> => {
   const res = await nextServer.post("/books/add", credentials);
   return res.data;
+};
+
+export const fetchBooksOwn = async (params: {
+  status?: string;
+}): Promise<Book[]> => {
+  const { data } = await nextServer.get<Book[]>("/books/own", { params });
+  return data;
 };
