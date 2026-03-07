@@ -1,0 +1,61 @@
+.selectWrapper {
+  width: 153px;
+}
+
+.reactSelectContainer :global(.custom-select__control) {
+  background-color: transparent;
+  border: 1px solid #3e3e3e;
+  border-radius: 12px;
+  min-height: 46px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.reactSelectContainer :global(.custom-select__control--is-focused),
+.reactSelectContainer :global(.custom-select__control:hover) {
+  border-color: #f9f9f9 !important;
+}
+
+.reactSelectContainer :global(.custom-select__single-value) {
+  color: #f9f9f9;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reactSelectContainer :global(.custom-select__indicator-separator) {
+  display: none;
+}
+
+.reactSelectContainer :global(.custom-select__dropdown-indicator) {
+  color: #f9f9f9;
+}
+
+.reactSelectContainer :global(.custom-select__menu) {
+  background-color: #262626;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+}
+
+.reactSelectContainer :global(.custom-select__option) {
+  background-color: transparent;
+  color: #686868;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.reactSelectContainer :global(.custom-select__option--is-selected) {
+  color: #f9f9f9;
+}
+
+.reactSelectContainer :global(.custom-select__option--is-focused) {
+  background-color: transparent;
+  color: #f9f9f9;
+}
+
+.reactSelectContainer :global(.custom-select__value-container) {
+  padding: 0 12px;
+}
