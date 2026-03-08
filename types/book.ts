@@ -1,4 +1,5 @@
-interface ProgressReadin {
+interface ProgressReading {
+  _id: string;
   startPage: number;
   startReading: string;
   finishPage: number;
@@ -7,6 +8,8 @@ interface ProgressReadin {
   status: string;
 }
 
+type BookStatus = "unread" | "in-progress" | "done";
+
 export interface Book {
   _id: string;
   title: string;
@@ -14,9 +17,9 @@ export interface Book {
   imageUrl: string;
   totalPages: number;
   recommend?: boolean;
-  status?: string;
+  status?: BookStatus;
   owner?: string;
-  progress?: ProgressReadin[];
+  progress?: ProgressReading[];
 }
 
 export interface RecommendedBooksResponse {
@@ -30,4 +33,9 @@ export interface AddBookCredentials {
   title: string;
   author: string;
   totalPages: number;
+}
+
+export interface ReadingParams {
+  id: string;
+  page: number;
 }

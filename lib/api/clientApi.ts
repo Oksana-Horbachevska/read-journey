@@ -9,11 +9,7 @@ import {
 } from "@/types/auth";
 import { nextServer } from "./api";
 import { AxiosError } from "axios";
-import {
-  AddBookCredentials,
-  Book,
-  RecommendedBooksResponse,
-} from "@/types/book";
+import { AddBookCredentials, Book, ReadingParams } from "@/types/book";
 
 // === AUTH ===
 export const loginUser = async (credentials: LoginCredentials) => {
@@ -95,5 +91,24 @@ export const fetchBooksOwn = async (params: {
   status?: string;
 }): Promise<Book[]> => {
   const { data } = await nextServer.get<Book[]>("/books/own", { params });
+  return data;
+};
+
+export const startReadingBook = async ({
+  id,
+  page,
+}: ReadingParams): Promise<Book> => {
+  const res = await nextServer.post("/books/reading/start", { id, page });
+  return res.data;
+};
+
+export const stopReadingBook = async ({
+  id,
+  page,
+}: ReadingParams): Promise<Book> => {
+  const { data } = await nextServer.post<Book>("/books/reading/finish", {
+    id,
+    page,
+  });
   return data;
 };
