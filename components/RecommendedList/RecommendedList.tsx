@@ -6,8 +6,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import BookDetails from "@/components/BookDetails/BookDetails";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addBookById } from "@/lib/api/clientApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addBookById, fetchBooksOwn } from "@/lib/api/clientApi";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import { AxiosError } from "axios";
 import { ApiErrorData } from "@/types/auth";
@@ -25,10 +25,21 @@ export default function RecommendedList({
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
+  const { data: ownBooks } = useQuery<Book[]>({
+    queryKey: ["ownBooks"],
+    queryFn: () => fetchBooksOwn({ status: "" }),
+  });
+
+  const isAlreadyAdded = !!ownBooks?.some(
+    (ownBook) =>
+      ownBook.title === selectedBook?.title &&
+      ownBook.author === selectedBook?.author,
+  );
+
   const { mutate, isPending } = useMutation({
     mutationFn: (id: string) => addBookById(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["books"] });
+      queryClient.invalidateQueries({ queryKey: ["ownBooks"] });
       setSelectedBook(null);
 
       setIsSuccessModalOpen(true);
@@ -87,6 +98,7 @@ export default function RecommendedList({
             book={selectedBook}
             onAdd={handleAddBook}
             isPending={isPending}
+            isAdded={isAlreadyAdded}
           />
         )}
       </Modal>

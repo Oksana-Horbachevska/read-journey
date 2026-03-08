@@ -5,7 +5,7 @@ import RecommendedList from "../RecommendedList/RecommendedList";
 import css from "./LibraryDashboardBooks.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { fetchBooks } from "@/lib/api/serverApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function LibraryDashboardBooks() {
   const [randomPage] = useState(() => Math.floor(Math.random() * 10) + 1);

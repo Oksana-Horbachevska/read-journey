@@ -44,7 +44,7 @@ export default function AddBook() {
     onSuccess: () => {
       <SuccessMessage />;
       reset();
-      queryClient.invalidateQueries({ queryKey: ["user-library"] });
+      queryClient.invalidateQueries({ queryKey: ["ownBooks"] });
       setIsSuccessModalOpen(true);
     },
     onError: (error: AxiosError<ApiErrorData>) => {

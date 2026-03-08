@@ -7,6 +7,7 @@ interface BookDetailsProps {
   book: Book;
   onAdd?: (id: string) => void;
   isPending?: boolean;
+  isAdded: boolean;
   variant?: "add" | "read";
 }
 
@@ -14,9 +15,12 @@ export default function BookDetails({
   book,
   onAdd,
   isPending,
+  isAdded = false,
   variant = "add",
 }: BookDetailsProps) {
   const router = useRouter();
+
+  const isButtonDisabled = isPending || isAdded;
 
   const handleAction = () => {
     if (variant === "read") {
@@ -46,13 +50,15 @@ export default function BookDetails({
         type="button"
         className={css.button}
         onClick={handleAction}
-        disabled={isPending}
+        disabled={isButtonDisabled}
       >
         {variant === "read"
           ? "Start reading"
-          : isPending
-            ? "Adding..."
-            : "Add to library"}
+          : isAdded
+            ? "Already in library"
+            : isPending
+              ? "Adding..."
+              : "Add to library"}
       </button>
     </div>
   );
