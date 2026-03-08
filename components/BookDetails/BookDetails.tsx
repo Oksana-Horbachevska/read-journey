@@ -7,7 +7,7 @@ interface BookDetailsProps {
   book: Book;
   onAdd?: (id: string) => void;
   isPending?: boolean;
-  isAdded: boolean;
+  isAdded?: boolean;
   variant?: "add" | "read";
 }
 
