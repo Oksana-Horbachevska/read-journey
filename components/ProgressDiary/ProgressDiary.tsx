@@ -1,69 +1,118 @@
-import { Book } from "@/types/book";
+"use client";
+
+import { Book, ProgressReading } from "@/types/book";
 import { format } from "date-fns";
 import css from "./ProgressDiary.module.css";
+import Image from "next/image";
 
 interface ProgressDiaryProps {
   progress: Book["progress"];
   totalPages: number;
 }
 
+interface GroupedProgress {
+  date: string;
+  totalDailyPages: number;
+  sessions: ProgressReading[];
+}
+
 export default function ProgressDiary({
   progress,
   totalPages,
 }: ProgressDiaryProps) {
-  const sortedProgress = [...(progress || [])]
+  const groupedData: GroupedProgress[] = (progress || [])
     .filter((s) => s.status === "inactive")
+    .reduce((acc: GroupedProgress[], session) => {
+      const dateKey = format(new Date(session.finishReading), "dd.MM.yyyy");
+      const pagesInSession = session.finishPage - session.startPage + 1;
+
+      const existingDay = acc.find((day) => day.date === dateKey);
+
+      if (existingDay) {
+        existingDay.totalDailyPages += pagesInSession;
+        existingDay.sessions.push(session);
+      } else {
+        acc.push({
+          date: dateKey,
+          totalDailyPages: pagesInSession,
+          sessions: [session],
+        });
+      }
+      return acc;
+    }, [])
     .reverse();
   return (
     <div className={css.diaryContainer}>
-      <ul className={css.list}>
-        {sortedProgress.map((session) => {
-          const pagesRead = session.finishPage - session.startPage + 1;
-          const percent = ((pagesRead / totalPages) * 100).toFixed(2);
-
-          // Formate date
-          const dateLabel = format(
-            new Date(session.finishReading),
-            "dd.MM.yyyy",
-          );
-          console.log("Progress array:", progress);
+      <ul className={css.dayList}>
+        {groupedData.map((day, dayIndex) => {
           return (
-            <li key={session._id} className={css.item}>
-              {/* Біла/сіра мітка зліва */}
-              <div className={css.marker}></div>
+            <li key={day.date} className={css.dayItem}>
+              <div
+                className={`${css.marker} ${dayIndex === 0 ? css.activeMarker : ""}`}
+              ></div>
 
               <div className={css.content}>
                 <div className={css.topRow}>
-                  <span className={css.date}>{dateLabel}</span>
-                  <span className={css.pagesCount}>{pagesRead} pages</span>
+                  <span
+                    className={`${css.date} ${dayIndex === 0 ? css.activeDate : ""}`}
+                  >
+                    {day.date}
+                  </span>
+                  <span className={css.pagesCount}>
+                    {day.totalDailyPages} pages
+                  </span>
                 </div>
 
-                <div className={css.detailsRow}>
-                  <div className={css.leftStats}>
-                    <p className={css.percent}>{percent}%</p>
-                    <p className={css.minutes}>
-                      {/* Тут можна додати розрахунок часу в хвилинах */}
-                      29 minutes
-                    </p>
-                  </div>
+                <ul className={css.sessionsList}>
+                  {day.sessions.reverse().map((session) => {
+                    const pagesRead =
+                      session.finishPage - session.startPage + 1;
+                    const percent = ((pagesRead / totalPages) * 100).toFixed(2);
 
-                  <div className={css.rightStats}>
-                    <div className={css.chartPlaceholder}>
-                      {/* Маленька зелена іконка графіка з макету */}
-                      <div className={css.miniGraph}></div>
-                    </div>
-                    <div className={css.speedInfo}>
-                      <p className={css.speed}>
-                        {session.speed} pages per hour
-                      </p>
-                      <button className={css.deleteBtn} type="button">
-                        <svg width={14} height={14}>
-                          <use href="/sprite.svg#icon-trash-03" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                    const start = new Date(session.startReading).getTime();
+                    const finish = new Date(session.finishReading).getTime();
+                    const minutes = Math.round((finish - start) / 60000) || 1;
+                    return (
+                      <li key={session._id} className={css.sessionItem}>
+                        <div className={css.leftStats}>
+                          <p className={css.percent}>{percent}%</p>
+                          <p className={css.minutes}>
+                            {minutes}
+                            minutes
+                          </p>
+                        </div>
+
+                        <div className={css.rightStats}>
+                          <div className={css.speedWrapper}>
+                            <div className={css.miniGraph}>
+                              <Image
+                                width={59}
+                                height={25}
+                                src="/images/Notifications/miniGraph.png"
+                                alt="reading speed graph"
+                              ></Image>
+                            </div>
+                            <button className={css.deleteBtn} type="button">
+                              <svg
+                                width={14}
+                                height={14}
+                                className={css.deleteBtnSvg}
+                              >
+                                <use href="/sprite.svg#icon-trash-2" />
+                              </svg>
+                            </button>
+                          </div>
+
+                          <div className={css.speedInfo}>
+                            <p className={css.speed}>
+                              {session.speed} pages per hour
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </li>
           );

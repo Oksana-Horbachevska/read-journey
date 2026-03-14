@@ -1,4 +1,4 @@
-interface ProgressReading {
+export interface ProgressReading {
   _id: string;
   startPage: number;
   startReading: string;
