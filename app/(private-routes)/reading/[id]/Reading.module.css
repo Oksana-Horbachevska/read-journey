@@ -1,8 +1,87 @@
-.title {
+.section {
+  padding: 40px;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  background: #1f1f1f;
+}
+
+.pageTitle {
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 28px;
   line-height: 114%;
   letter-spacing: 0.02em;
   color: #f9f9f9;
+  margin-bottom: 44px;
+}
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookImage {
+  border-radius: 8px;
+  width: 224px;
+  height: 340px;
+  margin-bottom: 25px;
+}
+
+.bookTitle {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  margin-bottom: 4px;
+}
+
+.bookAuthor {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  margin-bottom: 25px;
+}
+
+.readingBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 2px solid #f9f9f9;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0;
+  margin-bottom: 13px;
+}
+
+.innerStop {
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  background: #e90516;
+}
+
+.innerStart {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #e90516;
 }

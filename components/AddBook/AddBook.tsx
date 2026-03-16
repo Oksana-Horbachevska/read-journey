@@ -113,6 +113,7 @@ export default function AddBook() {
       <Modal
         isOpen={isSuccessModalOpen}
         onClose={() => setIsSuccessModalOpen(false)}
+        size="small"
       >
         <SuccessMessage />
       </Modal>

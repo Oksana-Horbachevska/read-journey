@@ -8,9 +8,15 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  size?: "default" | "small";
 }
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  size = "default",
+}: ModalProps) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -27,9 +33,11 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
 
   if (!isOpen) return null;
 
+  const modalClass = `${css.modal} ${size === "small" ? css.modalSmall : ""}`;
+
   return createPortal(
     <div className={css.backdrop} onClick={onClose}>
-      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={modalClass} onClick={(e) => e.stopPropagation()}>
         <button className={css.closeBtn} onClick={onClose}>
           <svg className={css.closeSvg} width="22" height="22">
             <use href="/sprite.svg#icon-close" />

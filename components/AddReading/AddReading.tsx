@@ -9,6 +9,9 @@ import toast from "react-hot-toast";
 import { startReadingBook, stopReadingBook } from "@/lib/api/clientApi";
 import { useParams } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Modal from "../Modal/Modal";
+import { useEffect, useState } from "react";
+import SuccessReadingMessage from "../SuccessReadingMessage/SuccessReadingMessage";
 
 interface FormFields {
   page: number;
@@ -29,6 +32,7 @@ export default function AddReading({ isReading, totalPages }: AddReadingProps) {
       .max(totalPages, `Cannot exceed ${totalPages} pages`),
   });
 
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const { id } = useParams();
   const queryClient = useQueryClient();
 
@@ -47,8 +51,12 @@ export default function AddReading({ isReading, totalPages }: AddReadingProps) {
       const payload = { id: id as string, page: data.page };
       return isReading ? stopReadingBook(payload) : startReadingBook(payload);
     },
-    onSuccess: () => {
+    onSuccess: (responseData, variables) => {
       queryClient.invalidateQueries({ queryKey: ["book", id] });
+
+      if (isReading && variables.page === totalPages) {
+        setIsSuccessModalOpen(true);
+      }
       reset();
       toast.success(isReading ? "Session stopped" : "Session started");
     },
@@ -62,6 +70,17 @@ export default function AddReading({ isReading, totalPages }: AddReadingProps) {
   const onSubmit = async (data: FormFields) => {
     mutate(data);
   };
+
+  useEffect(() => {
+    if (isSuccessModalOpen) {
+      const timer = setTimeout(() => {
+        setIsSuccessModalOpen(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccessModalOpen]);
+
   return (
     <div className={css.wrapper}>
       <h3 className={css.title}>{isReading ? "Stop page:" : "Start page:"}</h3>
@@ -80,6 +99,13 @@ export default function AddReading({ isReading, totalPages }: AddReadingProps) {
           {isPending ? "Processing..." : isReading ? "To stop" : "To start"}
         </button>
       </form>
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+        size="small"
+      >
+        <SuccessReadingMessage />
+      </Modal>
     </div>
   );
 }

@@ -27,11 +27,7 @@ export default function ReadingDashboardPage() {
 
   return (
     <Dashboard>
-      <AddReading
-        key={isReadingNow ? "active" : "inactive"}
-        isReading={isReadingNow}
-        totalPages={data?.totalPages}
-      />
+      <AddReading isReading={isReadingNow} totalPages={data?.totalPages} />
       <ReadingProgress book={data} />
     </Dashboard>
   );
