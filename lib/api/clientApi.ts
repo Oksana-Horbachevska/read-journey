@@ -112,3 +112,16 @@ export const stopReadingBook = async ({
   });
   return data;
 };
+
+export const deleteReadingSession = async ({
+  bookId,
+  readingId,
+}: {
+  bookId: string;
+  readingId: string;
+}) => {
+  const res = await nextServer.delete(`/books/reading`, {
+    params: { bookId, readingId },
+  });
+  return res.data;
+};

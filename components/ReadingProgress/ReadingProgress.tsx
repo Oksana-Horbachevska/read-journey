@@ -18,6 +18,10 @@ export default function ReadingProgress({ book }: ReadingProgressProps) {
     return <ProgressInfo />;
   }
 
+  const progress = book.progress || [];
+  const lastSession = progress[progress.length - 1];
+  const totalReadPages = lastSession ? lastSession.finishPage : 0;
+
   return (
     <div className={css.container}>
       <div className={css.titleWrapper}>
@@ -45,9 +49,16 @@ export default function ReadingProgress({ book }: ReadingProgressProps) {
       </div>
 
       {view === "diary" ? (
-        <ProgressDiary progress={book.progress} totalPages={book.totalPages} />
+        <ProgressDiary
+          progress={book.progress}
+          totalPages={book.totalPages}
+          bookId={book._id}
+        />
       ) : (
-        <ProgressStatistics />
+        <ProgressStatistics
+          totalReadPages={totalReadPages}
+          totalPages={book.totalPages}
+        />
       )}
     </div>
   );

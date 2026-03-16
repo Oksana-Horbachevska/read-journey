@@ -1,0 +1,86 @@
+.description {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  margin-bottom: 20px;
+}
+
+.graphContainer {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  background: #262626;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.chartBox {
+  position: relative;
+  width: 189px;
+  height: 189px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+  pointer-events: none;
+}
+
+.graphInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.marker {
+  border-radius: 4px;
+  width: 14px;
+  height: 14px;
+  background: #30b94d;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.percent {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+}
+
+.pagedRead {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #686868;
+}

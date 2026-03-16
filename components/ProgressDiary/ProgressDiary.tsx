@@ -4,10 +4,13 @@ import { Book, ProgressReading } from "@/types/book";
 import { format } from "date-fns";
 import css from "./ProgressDiary.module.css";
 import Image from "next/image";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteReadingSession } from "@/lib/api/clientApi";
 
 interface ProgressDiaryProps {
   progress: Book["progress"];
   totalPages: number;
+  bookId: string;
 }
 
 interface GroupedProgress {
@@ -19,7 +22,17 @@ interface GroupedProgress {
 export default function ProgressDiary({
   progress,
   totalPages,
+  bookId,
 }: ProgressDiaryProps) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (readingId: string) =>
+      deleteReadingSession({ bookId, readingId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["book", bookId] });
+    },
+  });
+
   const groupedData: GroupedProgress[] = (progress || [])
     .filter((s) => s.status === "inactive")
     .reduce((acc: GroupedProgress[], session) => {
@@ -41,6 +54,7 @@ export default function ProgressDiary({
       return acc;
     }, [])
     .reverse();
+
   return (
     <div className={css.diaryContainer}>
       <ul className={css.dayList}>
@@ -92,7 +106,12 @@ export default function ProgressDiary({
                                 alt="reading speed graph"
                               ></Image>
                             </div>
-                            <button className={css.deleteBtn} type="button">
+                            <button
+                              className={css.deleteBtn}
+                              type="button"
+                              onClick={() => mutation.mutate(session._id)}
+                              disabled={mutation.isPending}
+                            >
                               <svg
                                 width={14}
                                 height={14}
