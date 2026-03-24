@@ -8,8 +8,11 @@ export default function Register() {
     <section className={css.section}>
       <div className={css.authPart}>
         <Link href="/">
-          <svg className={css.logoIcon} width="182" height="17">
+          <svg className={css.logoDesktop} width="182" height="17">
             <use href="/sprite.svg#icon-Logo" />
+          </svg>
+          <svg className={css.logoMobile} width="42" height="17">
+            <use href="/sprite.svg#icon-Logo-short" />
           </svg>
         </Link>
         <h1 className={css.title}>

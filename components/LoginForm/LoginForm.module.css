@@ -144,3 +144,44 @@
 .input:-webkit-autofill:active {
   outline: none !important;
 }
+
+@media screen and (max-width: 1439px) {
+  .form {
+    margin-bottom: 174px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .btnWrapper {
+    margin-top: 12px;
+    gap: 14px;
+  }
+
+  .labelPrefix {
+    font-size: 12px;
+    line-height: 133%;
+  }
+
+  .input {
+    font-size: 12px;
+  }
+
+  .authSubmitBtn {
+    padding: 12px 26px;
+    height: 42px;
+    font-size: 14px;
+    line-height: 129%;
+    letter-spacing: 0.02em;
+  }
+
+  .authLink {
+    font-size: 12px;
+    line-height: 117%;
+    letter-spacing: -0.02em;
+  }
+}

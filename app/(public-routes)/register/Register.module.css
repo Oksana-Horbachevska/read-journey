@@ -11,8 +11,12 @@
   padding: 40px 64px;
 }
 
-.logoIcon {
+.logoDesktop {
   fill: white;
+}
+
+.logoMobile {
+  display: none;
 }
 
 .title {
@@ -42,8 +46,57 @@
   display: flex;
   justify-content: center;
   align-items: end;
-  margin-top: 86px;
 }
 
 .image {
+}
+
+@media screen and (max-width: 1439px) {
+  .section {
+    flex-direction: column;
+  }
+
+  .authPart {
+    width: 100%;
+  }
+
+  .imagePart {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section {
+    gap: 10px;
+  }
+
+  .authPart {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .imagePart {
+    display: flex;
+    width: 100%;
+  }
+
+  .logoDesktop {
+    display: none;
+  }
+
+  .logoMobile {
+    display: block;
+    fill: white;
+  }
+
+  .title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    line-height: 100%;
+  }
+
+  .imageWrapper {
+    margin-top: 20px;
+  }
 }

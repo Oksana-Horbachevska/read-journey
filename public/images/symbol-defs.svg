@@ -1,8 +1,0 @@
-<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs>
-<symbol id="icon-hourglass-01" viewBox="0 0 32 32">
-<path fill="none" stroke="#f9f9f9" style="stroke: var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M16 16l-5.697-4.748c-0.846-0.705-1.27-1.058-1.574-1.49-0.27-0.383-0.47-0.811-0.591-1.263-0.137-0.511-0.137-1.061-0.137-2.163v-3.669M16 16l5.697-4.748c0.847-0.705 1.27-1.058 1.574-1.49 0.27-0.383 0.47-0.811 0.592-1.263 0.137-0.511 0.137-1.061 0.137-2.163v-3.669M16 16l-5.697 4.748c-0.846 0.705-1.27 1.058-1.574 1.491-0.27 0.383-0.47 0.81-0.591 1.263-0.137 0.51-0.137 1.061-0.137 2.163v3.669M16 16l5.697 4.748c0.847 0.705 1.27 1.058 1.574 1.491 0.27 0.383 0.47 0.81 0.592 1.263 0.137 0.51 0.137 1.061 0.137 2.163v3.669"></path>
-<path fill="none" stroke="#f9f9f9" style="stroke: var(--color1, #f9f9f9)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M5.333 2.667h21.333M5.333 29.333h21.333"></path>
-</symbol>
-</defs>
-</svg>
