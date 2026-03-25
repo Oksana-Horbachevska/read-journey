@@ -10,12 +10,15 @@
   padding: 16px;
 }
 
-.logoIcon {
+.logoDesctop {
   fill: white;
   stroke: white;
 }
 
-.userNav {
+.logoMobile {
+  display: none;
+}
+.desktopNav {
 }
 
 .navList {
@@ -95,4 +98,38 @@
 .logoutUser:hover {
   background: #f9f9f9;
   color: #1f1f1f;
+}
+
+.burgerBtn {
+  display: none;
+}
+
+@media screen and (max-width: 1439px) {
+  .logoDesctop {
+    display: none;
+  }
+  .logoMobile {
+    display: block;
+    fill: white;
+    stroke: white;
+  }
+
+  .userName {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .burgerBtn {
+    display: block;
+  }
+  .burgerIcon {
+    fill: white;
+    stroke: white;
+  }
+
+  .desktopNav,
+  .logoutUser {
+    display: none;
+  }
 }

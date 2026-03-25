@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.backdrop.isOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menuContent {
+  position: absolute;
+  right: -100%;
+  width: 50%;
+  height: 100%;
+  background: #262626;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s ease;
+  gap: 218px;
+}
+
+.isOpen .menuContent {
+  right: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-end;
+}
+
+.closeIcon {
+  stroke: white;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.navLink {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 113%;
+  letter-spacing: -0.02em;
+  color: #f9f9f9;
+}
+
+.logoutBtn {
+  margin-top: auto;
+  display: block;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  padding: 10px 20px;
+  height: 42px;
+  width: max-content;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+}
+
+.logoutBtn:hover {
+  background: #f9f9f9;
+  color: #1f1f1f;
+}

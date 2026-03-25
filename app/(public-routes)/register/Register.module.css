@@ -48,9 +48,6 @@
   align-items: end;
 }
 
-.image {
-}
-
 @media screen and (max-width: 1439px) {
   .section {
     flex-direction: column;
