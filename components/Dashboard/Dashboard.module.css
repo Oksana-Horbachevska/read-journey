@@ -5,3 +5,21 @@
   width: 353px;
   height: 100%;
 }
+
+@media screen and (max-width: 1439px) {
+  .dashboard {
+    border-radius: 30px;
+    background: #1f1f1f;
+    padding: 32px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dashboard {
+    border-radius: 30px;
+    background: #1f1f1f;
+    padding: 20px;
+  }
+}

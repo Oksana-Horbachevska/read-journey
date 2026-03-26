@@ -6,6 +6,7 @@ import ReadingProgress from "@/components/ReadingProgress/ReadingProgress";
 import { fetchBookById } from "@/lib/api/clientApi";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import css from "./ReadingDashboard.module.css";
 
 export default function ReadingDashboardPage() {
   const params = useParams();
@@ -27,8 +28,10 @@ export default function ReadingDashboardPage() {
 
   return (
     <Dashboard>
-      <AddReading isReading={isReadingNow} totalPages={data?.totalPages} />
-      <ReadingProgress book={data} />
+      <div className={css.sectionWrapper}>
+        <AddReading isReading={isReadingNow} totalPages={data?.totalPages} />
+        <ReadingProgress book={data} />
+      </div>
     </Dashboard>
   );
 }

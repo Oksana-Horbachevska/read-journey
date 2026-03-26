@@ -1,0 +1,23 @@
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (max-width: 1439px) {
+  .sectionWrapper {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .quoteBlock {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sectionWrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

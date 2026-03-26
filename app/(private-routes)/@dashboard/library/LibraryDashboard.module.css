@@ -1,0 +1,29 @@
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.sectionWrapper > *:last-child {
+  margin-top: auto;
+}
+
+@media screen and (max-width: 1439px) {
+  .sectionWrapper {
+    flex-direction: row;
+    gap: 32px;
+    height: auto;
+  }
+
+  .sectionWrapper > *:last-child {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sectionWrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

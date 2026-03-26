@@ -11,3 +11,16 @@
 .mainContent {
   flex-grow: 1;
 }
+
+@media screen and (max-width: 1439px) {
+  .layoutWrapper {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .layoutWrapper {
+    gap: 10px;
+    padding-top: 10px;
+  }
+}
