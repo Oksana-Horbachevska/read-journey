@@ -53,3 +53,37 @@
 .nextBtn:disabled .nextSvg {
   stroke: rgba(249, 249, 249, 0.2);
 }
+
+@media screen and (max-width: 1439px) {
+  .section {
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section {
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 100%;
+  }
+
+  .prevBtn,
+  .nextBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .prevSvg,
+  .nextSvg {
+    width: 16px;
+    height: 16px;
+  }
+}

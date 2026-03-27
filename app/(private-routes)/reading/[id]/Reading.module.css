@@ -85,3 +85,38 @@
   border-radius: 100%;
   background: #e90516;
 }
+
+@media screen and (max-width: 767px) {
+  .section {
+    padding: 40px 20px;
+  }
+
+  .pageTitle {
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 40px;
+  }
+
+  .wrapper {
+    width: 137px;
+  }
+
+  .bookImage {
+    width: 137px;
+    height: 208px;
+    margin-bottom: 10px;
+  }
+
+  .bookTitle {
+    font-size: 14px;
+    line-height: 129%;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .bookAuthor {
+    font-size: 10px;
+    line-height: 120%;
+    margin-bottom: 20px;
+  }
+}

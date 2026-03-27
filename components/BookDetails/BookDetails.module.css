@@ -80,3 +80,30 @@
   background: #f9f9f9;
   color: #1f1f1f;
 }
+
+@media screen and (max-width: 767px) {
+  .imageWrapper {
+    width: 140px;
+    height: 213px;
+  }
+
+  .bookTitle {
+    font-size: 18px;
+    width: 100%;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bookAuthor {
+    font-size: 12px;
+    line-height: 117%;
+  }
+
+  .button {
+    font-size: 14px;
+    line-height: 129%;
+    padding: 12px 24px;
+  }
+}

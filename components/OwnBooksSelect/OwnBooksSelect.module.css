@@ -59,3 +59,17 @@
 .reactSelectContainer :global(.custom-select__value-container) {
   padding: 0 12px;
 }
+
+@media screen and (max-width: 767px) {
+  .selectWrapper {
+    width: 120px;
+  }
+
+  .reactSelectContainer :global(.custom-select__control) {
+    min-height: 40px;
+  }
+
+  .reactSelectContainer :global(.custom-select__single-value) {
+    font-size: 12px;
+  }
+}

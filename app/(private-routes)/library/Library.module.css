@@ -21,3 +21,14 @@
   letter-spacing: 0.02em;
   color: #f9f9f9;
 }
+
+@media screen and (max-width: 767px) {
+  .section {
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 100%;
+  }
+}

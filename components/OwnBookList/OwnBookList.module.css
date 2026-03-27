@@ -92,3 +92,23 @@
 .deleteSvg:hover {
   stroke: #e90516;
 }
+
+@media screen and (max-width: 1439px) {
+  .bookList {
+    column-gap: 25px;
+  }
+
+  .bookItem {
+    width: calc((100% - 3 * 25px) / 4);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .bookList {
+    column-gap: 21px;
+  }
+
+  .bookItem {
+    width: calc((100% - 21px) / 2);
+  }
+}
