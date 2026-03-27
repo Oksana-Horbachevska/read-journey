@@ -3,13 +3,14 @@
 import Link from "next/link";
 import css from "./Header.module.css";
 import { logoutUser } from "@/lib/api/clientApi";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useEffect, useState } from "react";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, clearIsAuthenticated } = useAuthStore();
 
@@ -45,12 +46,18 @@ export default function Header() {
       <nav className={css.desktopNav}>
         <ul className={css.navList}>
           <li className={css.navItem}>
-            <Link className={css.navLink} href="/recommended">
+            <Link
+              className={`${css.navLink} ${pathname === "/recommended" ? css.active : ""}`}
+              href="/recommended"
+            >
               Home
             </Link>
           </li>
           <li className={css.navItem}>
-            <Link className={css.navLink} href="/library">
+            <Link
+              className={`${css.navLink} ${pathname === "/library" ? css.active : ""}`}
+              href="/library"
+            >
               My library
             </Link>
           </li>
