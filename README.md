@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚Read Journey App 
 
-## Getting Started
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
+![Node.js v18](https://img.shields.io/badge/node-v18-green)
+![Next.js 15](https://img.shields.io/badge/next.js-15-yellow)
 
-First, run the development server:
+Read Journey is a modern web application designed for book lovers to track their reading progress, manage a personal library, and discover new literature. The platform offers an intuitive interface to help users stay organized and motivated on their reading goals.
+
+
+## ✨ Key Features
+
+Personal Library: Add books from a global database or create your own entries.
+
+Progress Tracking: Log reading sessions and visualize your journey through each book.
+
+Smart Filtering: Sort and filter books by title, author, or reading status.
+
+Authentication: Secure registration and login system with JWT-based session management.
+
+Responsive Design: Fully optimized for mobile (with a sleek burger menu), tablet, and desktop.
+
+Pagination: Smooth navigation through extensive book collections.
+
+Protected Routes: Middleware-based access control for private user data.
+   
+   
+
+
+
+
+## 🛠️ Tech Stack
+
+Framework: Next.js 15 (App Router)
+
+Library: React 19
+
+Language: TypeScript
+
+State Management: Zustand
+
+Data Fetching: TanStack React Query (v5)
+
+Forms: React Hook Form + Yup (validation)
+
+Notifications: React Hot Toast
+
+Styling: CSS Modules + Modern-normalize
+
+Auth: Custom JWT implementation with HTTP-only cookies
+
+
+     
+
+## ⚙️ Installation
 
 ```bash
+git clone https://github.com/Oksana-Horbachevska/read-journey
+cd read-journey
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Authentication & Security
+JWT Strategy: Access and Refresh tokens stored in secure HTTP-only cookies.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Middleware: Server-side route protection and automatic redirects for unauthorized users.
 
-## Learn More
+Validation: Comprehensive form validation to ensure data integrity. 
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project, you will need to add the following environment variables to your .env file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`NEXT_PUBLIC_API_URL=`  
+`NODE_BACKEND_URL=`
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are always welcome!
+
+Contributions are welcome!
+  Fork the repository
+  Create a branch (git checkout -b feature-name)
+  Commit your changes (git commit -m "Feature")
+  Push to the branch (git push origin feature-name)
+  Open a Pull Request
