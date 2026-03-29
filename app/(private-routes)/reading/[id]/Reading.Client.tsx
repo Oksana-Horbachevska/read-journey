@@ -30,8 +30,10 @@ export default function ReadingPageClient() {
         src={data.imageUrl}
         className={css.bookImage}
       ></Image>
-      <h3 className={css.bookTitle}>{data.title}</h3>
-      <p className={css.bookAuthor}>{data.author}</p>
+      <div className={css.infoWrapper}>
+        <h3 className={css.bookTitle}>{data.title}</h3>
+        <p className={css.bookAuthor}>{data.author}</p>
+      </div>
       <button className={css.readingBtn}>
         <span className={isReading ? css.innerStop : css.innerStart}></span>
       </button>
