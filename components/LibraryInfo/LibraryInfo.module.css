@@ -1,0 +1,56 @@
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 274px;
+  height: 186px;
+}
+
+.text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #f9f9f9;
+}
+
+.text .diffText {
+  color: #686868;
+}
+
+.imageWrapper {
+  margin: 0 auto;
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  background-color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1439px) {
+}
+
+@media screen and (max-width: 767px) {
+  .sectionWrapper {
+    width: 197px;
+    height: 164px;
+    gap: 10px;
+  }
+
+  .imageWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .image {
+    width: 50px;
+    height: 50px;
+  }
+}

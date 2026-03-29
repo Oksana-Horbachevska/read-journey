@@ -6,17 +6,37 @@ import css from "./RecommendedBooks.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function RecommendedBooks() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [limit, setLimit] = useState(10);
+
+  useEffect(() => {
+    const updateLimit = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setLimit(2);
+      }
+      if (width < 1440) {
+        setLimit(8);
+      } else {
+        setLimit(10);
+      }
+    };
+
+    updateLimit();
+    window.addEventListener("resize", updateLimit);
+    return () => window.removeEventListener("resize", updateLimit);
+  }, []);
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const title = searchParams.get("title") || "";
   const author = searchParams.get("author") || "";
   const params = {
     page: currentPage,
-    limit: 10,
+    limit,
     title,
     author,
   };

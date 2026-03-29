@@ -1,4 +1,7 @@
 .section {
+  display: flex;
+  flex-direction: column;
+  min-height: 651px;
   height: 100%;
   padding: 40px;
   border-radius: 30px;
@@ -22,9 +25,18 @@
   color: #f9f9f9;
 }
 
+.contentWrapper.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
 @media screen and (max-width: 767px) {
   .section {
     padding: 40px 20px;
+    min-height: 518px;
+    height: 100%;
   }
 
   .title {
