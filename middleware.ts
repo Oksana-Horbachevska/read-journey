@@ -7,7 +7,7 @@ const privatePaths = ["/recommended", "/library", "/reading"];
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Отримуємо куки через req.cookies (це працює в Edge)
+  // Extract auth tokens from cookies
   const accessToken = req.cookies.get("accessToken")?.value;
   const refreshToken = req.cookies.get("refreshToken")?.value;
 
@@ -15,17 +15,17 @@ export function middleware(req: NextRequest) {
   const isPublicPath = publicPaths.some((path) => pathname.startsWith(path));
   const isPrivatePath = privatePaths.some((path) => pathname.startsWith(path));
 
-  // 1. Якщо шлях приватний і немає ЖОДНОГО токена -> на логін
+  // 1. If the path is private and NO tokens are present -> redirect to login
   if (isPrivatePath && !isAuth) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // 2. Якщо шлях публічний (логін/реєстрація), але юзер вже залогінений -> на головну
+  // 2. If the path is public (login/register) but the user is already authenticated -> redirect to home
   if (isPublicPath && isAuth) {
     return NextResponse.redirect(new URL("/recommended", req.url));
   }
 
-  // 3. В усіх інших випадках - просто йдемо далі
+  // 3. For all other cases - proceed as usual
   return NextResponse.next();
 }
 

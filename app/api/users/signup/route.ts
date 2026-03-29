@@ -5,10 +5,10 @@ import { cookies } from "next/headers";
 export async function POST(req: NextRequest) {
   const body = await req.json();
   try {
-    // 1. Робимо запит на реєстрацію
+    // 1. Send registration request to the API
     const apiRes = await api.post("/users/signup", body);
 
-    // 2. Беремо токени з тіла відповіді (так само, як у логіні)
+    // 2. Extract tokens from the response body (matching login logic)
     const { token, refreshToken } = apiRes.data;
 
     const cookieStore = await cookies();
@@ -20,22 +20,22 @@ export async function POST(req: NextRequest) {
       path: "/",
     };
 
-    // 3. Явно встановлюємо куки під іменами, які розуміє Middleware
+    // 3. Set cookies using names expected by the Middleware
     if (token) {
       cookieStore.set("accessToken", token, {
         ...cookieOptions,
-        maxAge: 60 * 60 * 24, // 24 години
+        maxAge: 60 * 60 * 24, // 24 h
       });
     }
 
     if (refreshToken) {
       cookieStore.set("refreshToken", refreshToken, {
         ...cookieOptions,
-        maxAge: 60 * 60 * 24 * 7, // 7 днів
+        maxAge: 60 * 60 * 24 * 7, // 7 days
       });
     }
 
-    // Повертаємо дані юзера на клієнт
+    // Return user data to the client
     return NextResponse.json(apiRes.data);
   } catch (error) {
     const apiError = error as ApiError;
