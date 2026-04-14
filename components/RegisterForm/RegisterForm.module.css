@@ -11,6 +11,7 @@
 }
 
 .inputWrapper {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -41,6 +42,7 @@
 
 .input {
   flex-grow: 1;
+  min-width: 0;
   height: 100%;
   background: transparent;
   border: none;
@@ -68,6 +70,18 @@
   font-weight: 500;
   line-height: 1.2;
   margin-left: 14px;
+}
+
+.eyeBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .passwordSvg {
@@ -162,6 +176,11 @@
     gap: 14px;
   }
 
+  .inputWrapper {
+    padding: 0 12px;
+    gap: 6px;
+  }
+
   .labelPrefix {
     font-size: 12px;
     line-height: 133%;
@@ -169,6 +188,10 @@
 
   .input {
     font-size: 12px;
+  }
+  .eyeBtn {
+    width: 20px;
+    height: 20px;
   }
 
   .authSubmitBtn {
